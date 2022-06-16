@@ -26,4 +26,4 @@ const favorites_hash = [{name: 'John Smith', age: 54, favorites: ['food', 'movie
 const favorites_names = _.chain(favorites_hash)
 .map((hash) => hash.favorites)
 .value()
-console.log(_.flatten(_.uniq(favorites_names)))
+console.log(_.uniq(_.flatten(favorites_names)))
