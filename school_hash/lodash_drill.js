@@ -19,31 +19,32 @@ const under30 = _.chain(adults)
 // console.log(under30)
 
 // 2. list all children who can swim or dance, and sort by gender and age.
-const SwimDanceChildren = _.chain(children)
-.filter((hash) => (hash.skills == "swim") || (hash.skills == 'dance'))
+const swimDanceChildren = _.chain(children)
+.filter((hash) => (hash.skills === "swim") || (hash.skills === 'dance'))
 .sortBy((hash) => hash.age)
 .map("first_name")
 .value()
 
-// console.log(SwimDanceChildren)
+// console.log(swimDanceChildren)
 
 // 3. get an array of population, which contains all the people (adults and children) in the array.
 
 // 4. filter by people who have daughters and are not married.
 const daughtersWithUnmarried = _.chain(adults)
-.filter((hash) => (!(hash.married)) && (hash.gender == 'Female'))
+.filter((hash) => (!(hash.married)) && (hash.gender === 'Female'))
 .map("first_name")
 .value()
 // console.log(daughtersWithUnmarried)
 // 5. filter by married people who can jump.
-const marriedJump = _.chain(adults)
-.filter((hash) => (hash.married) && (hash.skills == 'jump'))
+const marriedAndJumpAdults = _.chain(adults)
+.filter((hash) => (hash.married) && (hash.skills === 'jump'))
 .map("first_name")
 .value()
-// console.log(marriedJump)
+// console.log(marriedAndJumpAdults)
 // 6. filter by people who have last name that starts with 'j' or later in the alphabet, and have married children.
 const startWithJ = _.chain(rawValues)
-.filter((hash) => (hash.last_name[0] == 'J') && (hash.married))
+.filter((hash) => (_.startsWith(hash.last_name, ('J')) && (hash.married)))
+// .filter((hash) => (hash.last_name[0] == 'J') && (hash.married))
 .map("first_name")
 .value()
 // console.log(startWithJ)
@@ -69,12 +70,12 @@ const updatedObject = _.chain(rawValues)
     // return _.merge(createdHash, newHashes);
     // return {...createdHash,...newHashes}
 
-    const { first_name: first,last_name: last,...rest } = hash
+    const { first_name: first,last_name: last,...rest } = hash;
     return {name: {first, last},...rest}
 
 })
 .value()
-console.log(updatedObject)
+// console.log(updatedObject)
 
 
 // statesObj = _.map(rawValues, (hash) =>{
@@ -84,12 +85,14 @@ console.log(updatedObject)
 // console.log(statesObj)
 
 // 8. get an array of all children
-const arrayChildren = _.chain(children)
-.map("first_name")
-.value()
-// console.log(arrayChildren)
+const arrayChildren = _.map(rawValues,"first_name")
+// _.chain(children)
+// .map("first_name")
+// .value()
+console.log(arrayChildren)
 // 9. get an array of just the ages
-const age = _.chain(rawValues)
-.map("age")
-.value()
+const age = _.map(rawValues,"age")
+// _.chain(rawValues)
+// .map("age")
+// .value()
 // console.log(age)
