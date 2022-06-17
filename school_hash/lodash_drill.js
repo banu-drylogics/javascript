@@ -14,7 +14,7 @@ adults = _.filter(rawValues, (hash) => hash.age >= "18")
 
 // 1. filter by age under 30 and has the skills 'run' or 'swim'.
 const under30 = _.chain(adults)
-.filter((hash) => ((hash.age < 30) && ((hash.skills == 'swim')|| (hash.skills == 'run'))))
+.filter((hash) => ((hash.age < 30) && ((hash.skills === 'swim')|| (hash.skills === 'run'))))
 .value()
 // console.log(under30)
 
